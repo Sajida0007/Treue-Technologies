@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Unit Converter By Sajida Khan</title>
+</head>
+<style>
+  body{
+    display:inline-table;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(197, 197, 218);
+  }
+  h1{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    background-color: rgb(5, 5, 5);
+    border: 2px solid black;
+    color: white;
+    font-weight: bold;
+    
+  }
+  label{
+    color: white;
+    display: flow-root;
+    padding: 10px;
+    margin: 12px;
+    
+  }
+  button{
+    background-color: black;
+    color: white;
+    margin: 5px;
+  }
+</style>
+<body>
+    <h1>Unit Converter</h1>
+    
+    <label for="inputValue">Enter Value:</label>
+    <input type="number" id="inputValue">
+    
+    <label for="inputUnit">Select Input Unit:</label>
+    <select id="inputUnit">
+        <option value="meters">Meters</option>
+        <option value="centimeters">Centimeters</option>
+        <option value="feet">Feet</option>
+        <option value="inches">Inches</option>
+    </select>
+    
+    <label for="outputUnit">Select Output Unit:</label>
+    <select id="outputUnit">
+        <option value="meters">Meters</option>
+        <option value="centimeters">Centimeters</option>
+        <option value="feet">Feet</option>
+        <option value="inches">Inches</option>
+    </select>
+    
+    <button onclick="convert()">Convert</button>
+    
+    <p id="result"></p>
+    
+    <script>
+        function convert() {
+            const inputValue = parseFloat(document.getElementById('inputValue').value);
+            const inputUnit = document.getElementById('inputUnit').value;
+            const outputUnit = document.getElementById('outputUnit').value;
+            
+            let convertedValue;
+            
+            if (inputUnit === outputUnit) {
+                convertedValue = inputValue;
+            } else if (inputUnit === 'meters') {
+                if (outputUnit === 'centimeters') {
+                    convertedValue = inputValue * 100;
+                } else if (outputUnit === 'feet') {
+                    convertedValue = inputValue * 3.28084;
+                } else if (outputUnit === 'inches') {
+                    convertedValue = inputValue * 39.3701;
+                }
+            } else if (inputUnit === 'centimeters') {
+                if (outputUnit === 'meters') {
+                    convertedValue = inputValue / 100;
+                } else if (outputUnit === 'feet') {
+                    convertedValue = inputValue / 30.48;
+                } else if (outputUnit === 'inches') {
+                    convertedValue = inputValue / 2.54;
+                }
+            } else if (inputUnit === 'feet') {
+                if (outputUnit === 'meters') {
+                    convertedValue = inputValue / 3.28084;
+                } else if (outputUnit === 'centimeters') {
+                    convertedValue = inputValue * 30.48;
+                } else if (outputUnit === 'inches') {
+                    convertedValue = inputValue * 12;
+                }
+            } else if (inputUnit === 'inches') {
+                if (outputUnit === 'meters') {
+                    convertedValue = inputValue / 39.3701;
+                } else if (outputUnit === 'centimeters') {
+                    convertedValue = inputValue * 2.54;
+                } else if (outputUnit === 'feet') {
+                    convertedValue = inputValue / 12;
+                }
+            }
+            
+            document.getElementById('result').textContent = `Converted Value: ${convertedValue.toFixed(2)} ${outputUnit}`;
+        }
+    </script>
+</body>
+</html>
